@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
 
 function App() {
+  useEffect(() =>{
+    const ws = new WebSocket('ws://localhost:5000');
+    ws.onopen = () => {
+      console.log('Connected to server!');
+    }
+    ws.onmessage = (event) => {
+      console.log(event.data);
+    }
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>
+        Welcome to trivia night
+      </h1>
     </div>
   );
 }
